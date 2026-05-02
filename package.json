@@ -1,0 +1,69 @@
+{
+  "name": "fitdays-api",
+  "version": "0.1.0",
+  "description": "Unofficial TypeScript SDK for the FitDays API — login, sync, and full response typings.",
+  "keywords": [
+    "fitdays",
+    "icomon",
+    "smart-scale",
+    "body-composition",
+    "weight",
+    "bluetooth-scale",
+    "sdk",
+    "api-client",
+    "typescript"
+  ],
+  "license": "MIT",
+  "author": "Rodrigo Roque <rodrigogoncalvesroque@gmail.com>",
+  "homepage": "https://github.com/rodrigogoncalvesroque/fitdays-api#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rodrigogoncalvesroque/fitdays-api.git"
+  },
+  "bugs": {
+    "url": "https://github.com/rodrigogoncalvesroque/fitdays-api/issues"
+  },
+  "type": "module",
+  "main": "dist/fitdays-api.js",
+  "types": "dist/fitdays-api.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/fitdays-api.d.ts",
+      "import": "./dist/fitdays-api.js"
+    }
+  },
+  "sideEffects": false,
+  "files": [
+    "dist",
+    "!dist/scripts",
+    "!dist/tests",
+    "!dist/**/*.test.*"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "build:publish": "rm -rf dist && tsc -p tsconfig.build.json",
+    "lint": "eslint --fix",
+    "test": "tsc && node --test --experimental-test-coverage --test-coverage-include='dist/client/**' --test-coverage-include='dist/utils/**' --test-coverage-include='dist/errors/**' --test-coverage-include='dist/constants/**' --test-coverage-lines=90 --test-coverage-functions=90 --test-coverage-branches=80 dist/tests/*.test.js",
+    "test:sync": "tsc && node dist/scripts/test-sync.js",
+    "verify-sign": "tsc && node dist/scripts/verify-sign.js",
+    "prepack": "npm run build:publish",
+    "prepublishOnly": "npm run lint && npm test"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@eslint/js": "10.0.1",
+    "@stylistic/eslint-plugin": "5.10.0",
+    "@types/node": "^20.12.0",
+    "eslint": "10.2.0",
+    "eslint-plugin-perfectionist": "5.8.0",
+    "globals": "17.4.0",
+    "typescript": "^5.5.3",
+    "typescript-eslint": "8.58.1"
+  },
+  "engines": {
+    "node": ">=22.0.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
