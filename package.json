@@ -58,7 +58,7 @@
     "eslint-plugin-perfectionist": "5.8.0",
     "globals": "17.4.0",
     "typescript": "^5.5.3",
-    "typescript-eslint": "8.58.1"
+    "typescript-eslint": "8.59.2"
   },
   "engines": {
     "node": ">=22.0.0"
