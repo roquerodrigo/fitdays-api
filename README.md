@@ -1,5 +1,7 @@
 # fitdays-api
 
+[![npm](https://img.shields.io/npm/v/fitdays-api)](https://www.npmjs.com/package/fitdays-api)
+
 Unofficial TypeScript SDK for the FitDays API.
 
 Covers email/phone login and data sync (`syncFromServer`), with full typings for the response — including automatic JSON parsing of the `ext_data` field on weight measurements.
