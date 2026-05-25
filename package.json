@@ -1,6 +1,6 @@
 {
   "name": "fitdays-api",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Unofficial TypeScript SDK for the FitDays API - login, sync, and full response typings.",
   "keywords": [
     "fitdays",
