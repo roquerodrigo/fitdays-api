@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.3](https://github.com/roquerodrigo/fitdays-api/compare/v1.0.2...v1.0.3) (2026-07-20)
+
+
+### Documentation
+
+* add CLAUDE.md ([f9d3cad](https://github.com/roquerodrigo/fitdays-api/commit/f9d3cad70c9073ee2bbdb319984c9a3ca487074a))
+
 ## [1.0.2](https://github.com/roquerodrigo/fitdays-api/compare/v1.0.1...v1.0.2) (2026-05-25)
 
 
