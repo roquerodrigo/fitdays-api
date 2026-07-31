@@ -53,11 +53,12 @@ release-please/publish rely on.
 - Test fixtures are captured-byte, no live network calls in the unit test
   suite — real-device/live-server testing only happens via
   `npm run test:sync`, which is not run in CI.
-- **No CI workflow runs lint/tests on push or PR.** `.github/workflows/`
-  only has `release.yml` (release-please, triggered on push to `main`) and
-  `auto-assign.yml` (assigns @roquerodrigo to new PRs). Treat `npm run lint
-  && npm test` as the only gate — nothing else will catch a broken change
-  before merge.
+- **`ci.yml` gates lint, build and tests** on push to `main` and on every
+  PR, by calling the shared `npm-*` reusables from `roquerodrigo/.github`.
+  The lint job runs `eslint` directly, *not* `npm run lint` — that script
+  carries `--fix` and would pass on anything auto-fixable. Every job
+  installs with `npm ci`, so a lockfile out of sync with `package.json`
+  fails the build.
 - Versioning and `CHANGELOG.md` are fully owned by `release-please`
   (Conventional Commits parsed from `main`). Don't hand-edit
   `package.json`'s `version`.
