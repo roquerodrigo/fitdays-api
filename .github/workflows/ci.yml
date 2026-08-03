@@ -6,17 +6,29 @@ on:
   pull_request:
     branches: [main]
 
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
 permissions:
   contents: read
 
 jobs:
   lint:
-    uses: roquerodrigo/.github/.github/workflows/npm-lint.yml@v3
+    uses: roquerodrigo/workflows/.github/workflows/node-lint.yml@main
 
   build:
     needs: lint
-    uses: roquerodrigo/.github/.github/workflows/npm-build.yml@v3
+    uses: roquerodrigo/workflows/.github/workflows/node-build.yml@main
 
   tests:
     needs: lint
-    uses: roquerodrigo/.github/.github/workflows/npm-tests.yml@v3
+    uses: roquerodrigo/workflows/.github/workflows/node-test.yml@main
+
+  update-pr-branch:
+    if: github.event_name == 'pull_request'
+    needs: [lint, build, tests]
+    permissions:
+      contents: write
+      pull-requests: write
+    uses: roquerodrigo/workflows/.github/workflows/update-pr-branch.yml@main

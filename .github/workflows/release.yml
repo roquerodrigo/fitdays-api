@@ -1,22 +1,38 @@
-name: Release Please
+name: Release
+
+# release-please grooms the release pull request and tags it; the tag is then
+# published to npm through trusted publishing, so there is no registry token
+# stored here.
+#
+# The `workflow_run.event == 'push'` condition is what stops a pull request with
+# green CI from cutting a release.
 
 on:
-  push:
-    branches:
-      - main
+  workflow_run:
+    workflows: [CI]
+    types: [completed]
+    branches: [main]
 
-permissions:
-  contents: write
-  pull-requests: write
+permissions: {}
 
 jobs:
-  release-please:
-    name: Release Please
-    runs-on: ubuntu-latest
-    steps:
-      - name: Run release-please
-        uses: googleapis/release-please-action@v5
-        with:
-          token: ${{ secrets.RELEASE_PLEASE_PAT }}
-          config-file: release-please-config.json
-          manifest-file: .release-please-manifest.json
+  release:
+    if: >-
+      github.event.workflow_run.event == 'push' &&
+      github.event.workflow_run.conclusion == 'success'
+    permissions:
+      contents: write
+      pull-requests: write
+    uses: roquerodrigo/workflows/.github/workflows/release-please.yml@main
+    secrets:
+      release-token: ${{ secrets.RELEASE_PLEASE_PAT }}
+
+  publish:
+    needs: release
+    if: needs.release.outputs.release-created == 'true'
+    permissions:
+      contents: read
+      id-token: write
+    uses: roquerodrigo/workflows/.github/workflows/publish-npm.yml@main
+    with:
+      ref: ${{ needs.release.outputs.tag-name }}
