@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.0.3](https://github.com/roquerodrigo/fitdays-api/compare/v1.0.2...v1.0.3) (2026-08-03)
+
+
+### Bug Fixes
+
+* **build:** declare the node type definitions explicitly ([cea3265](https://github.com/roquerodrigo/fitdays-api/commit/cea326525c49bf3054b3aaee8876f0fd312c7710))
+
+
+### Documentation
+
+* add CLAUDE.md ([f9d3cad](https://github.com/roquerodrigo/fitdays-api/commit/f9d3cad70c9073ee2bbdb319984c9a3ca487074a))
+
 ## [1.0.2](https://github.com/roquerodrigo/fitdays-api/compare/v1.0.1...v1.0.2) (2026-05-25)
 
 
