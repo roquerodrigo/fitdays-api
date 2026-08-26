@@ -26,9 +26,10 @@ export class FitDaysClient {
   private readonly fetchImpl: typeof fetch
 
   constructor(opts: ClientOptions = {}) {
-    this.baseUrl = (opts.baseUrl ?? REGION_HOSTS[opts.region ?? 'us']).replace(/\/$/, '')
-    this.country = opts.country ?? 'US'
-    this.language = opts.language ?? 'en'
+    const region = opts.region ?? 'us'
+    this.baseUrl = (opts.baseUrl ?? REGION_HOSTS[region]).replace(/\/$/, '')
+    this.country = opts.country ?? (region === 'cn' ? 'CN' : 'US')
+    this.language = opts.language ?? (region === 'cn' ? 'zh' : 'en')
     this.deviceModel = opts.deviceModel ?? DEFAULT_DEVICE_MODEL
     this.clientId = opts.clientId ?? newClientId()
     this.fetchImpl = opts.fetchImpl ?? fetch

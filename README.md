@@ -82,8 +82,8 @@ new FitDaysClient(opts?: ClientOptions)
 | ------------- | -------------------------------- | ---------------------------------------------------------- |
 | `region`      | `'us'`                           | `'us'` \| `'eu'` \| `'cn'` — picks the API host            |
 | `baseUrl`     | derived from `region`            | overrides the host (useful for tests or new hosts)         |
-| `country`     | `'US'`                           | sent as the `country` query param                          |
-| `language`    | `'en'`                           | sent as the `language` query param                         |
+| `country`     | `'CN'` for `cn`, otherwise `'US'` | sent as the `country` query param                          |
+| `language`    | `'zh'` for `cn`, otherwise `'en'` | sent as the `language` query param                         |
 | `deviceModel` | `'AndroidSDKbuiltforarm64-6.0'`  | sent as the `device_model` query param                     |
 | `clientId`    | generated (uppercase MD5 of UUID) | identifies the client "device"                            |
 | `fetchImpl`   | `globalThis.fetch`               | inject for tests or to use `undici` / `node-fetch`         |
