@@ -14,7 +14,7 @@ import { FitDaysClient } from 'fitdays-api'
 const client = new FitDaysClient({ region: 'us' })
 await client.login('foo@example.com', 'my-password')
 const sync = await client.syncAll()
-console.log(sync.data.weight_list[0].weight_kg)
+console.log(sync.data.weight_list[0]?.weight_kg)
 ```
 
 ---
@@ -133,7 +133,7 @@ Handles `code: 302` redirects automatically (updates `client.baseUrl` and replay
 
 Heads-up: by server convention, **`startTime` is the most-recent bound** and `endTime` is the oldest (both in unix-seconds). `syncAll()` is shorthand for `[now - ~6 years, now]`.
 
-Each `weight_list[i].ext_data` is JSON-decoded into a typed object before it reaches you — no need to call `JSON.parse` yourself.
+The SDK automatically parses `weight_list[i].ext_data`, including `null` values. Missing response lists are returned as empty arrays.
 
 ---
 
@@ -154,17 +154,17 @@ import type {
 
 | type                    | content                                                       |
 | ----------------------- | ------------------------------------------------------------- |
-| `SyncFromServerData`    | root object with 13 lists + `account`                         |
+| `SyncFromServerData`    | root object with `account` and response lists                 |
 | `AccountInfo`           | account record (uid, email, server_id, configs, …) + sub-users |
 | `User`                  | sub-user (suid, nickname, sex, birthday, height, photo)       |
 | `Device` / `BindDevice` | physical device and its account binding                       |
 | `WeightRecord`          | one body-composition measurement                              |
-| `WeightExtData`         | parsed shape of `ext_data` inside each `WeightRecord`         |
+| `WeightExtData`         | parsed shape of present `ext_data` inside each `WeightRecord` |
 | `HeightRecord`          | one height measurement                                        |
 
 Lists with too few observed samples stay typed as `Record<string, unknown>[]` (`RulerRecord`, `BalanceRecord`, `GravityRecord`, `ImpedanceRecord`, `HrRecord`, `SkipRecord`, `Product`). Once you capture a populated response, tighten them in `src/types/sync.ts`.
 
-If you need the un-parsed shape, use `WeightRecordRaw` / `SyncFromServerDataRaw` (same fields, but `ext_data` stays as a `string`). The helpers `parseWeightRecord` and `parseSyncFromServerData` are exported as well.
+If you need the un-parsed shape, use `WeightRecordRaw` / `SyncFromServerDataRaw` (same fields, but conditional fields may be absent or `null`). The helpers `parseWeightRecord` and `parseSyncFromServerData` are exported as well.
 
 ---
 

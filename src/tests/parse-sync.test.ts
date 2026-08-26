@@ -109,7 +109,7 @@ const rawWeight: WeightRecordRaw = {
 describe('parseWeightRecord', () => {
   it('parses ext_data into a typed object', () => {
     const parsed = parseWeightRecord(rawWeight)
-    assert.equal(typeof parsed.ext_data, 'object')
+    assert.ok(parsed.ext_data)
     assert.equal(parsed.ext_data.age, 29)
     assert.equal(parsed.ext_data.bodyType, 8)
     assert.equal(parsed.ext_data.deviceNameExt, 'HC059')
@@ -121,6 +121,16 @@ describe('parseWeightRecord', () => {
     assert.equal(parsed.uid, rawWeight.uid)
     assert.equal(parsed.weight_kg, rawWeight.weight_kg)
     assert.equal(parsed.measured_time, rawWeight.measured_time)
+  })
+
+  it('normalizes absent, null, and empty ext_data to null', () => {
+    const rawWeightWithoutExtensionData = { ...rawWeight }
+    delete rawWeightWithoutExtensionData.ext_data
+
+    assert.equal(parseWeightRecord(rawWeightWithoutExtensionData).ext_data, null)
+    assert.equal(parseWeightRecord({ ...rawWeight, ext_data: null }).ext_data, null)
+    assert.equal(parseWeightRecord({ ...rawWeight, ext_data: '' }).ext_data, null)
+    assert.equal(parseWeightRecord({ ...rawWeight, ext_data: 'null' }).ext_data, null)
   })
 
   it('throws on invalid JSON in ext_data', () => {
@@ -148,9 +158,9 @@ describe('parseSyncFromServerData', () => {
   it('maps every weight record', () => {
     const parsed = parseSyncFromServerData(rawData)
     assert.equal(parsed.weight_list.length, 2)
-    for (const w of parsed.weight_list) {
-      assert.equal(typeof w.ext_data, 'object')
-      assert.equal(w.ext_data.age, 29)
+    for (const weightRecord of parsed.weight_list) {
+      assert.ok(weightRecord.ext_data)
+      assert.equal(weightRecord.ext_data.age, 29)
     }
   })
 
@@ -163,6 +173,37 @@ describe('parseSyncFromServerData', () => {
 
   it('handles an empty weight_list', () => {
     const parsed = parseSyncFromServerData({ ...rawData, weight_list: [] })
+    assert.deepEqual(parsed.weight_list, [])
+  })
+
+  it('normalizes missing response lists to empty arrays', () => {
+    const parsed = parseSyncFromServerData({ account: rawData.account })
+    for (const listName of [
+      'balance_list',
+      'bind_device',
+      'devices',
+      'gravity_list',
+      'height_list',
+      'hr_list',
+      'impedance_list',
+      'products',
+      'rulers_list',
+      'skip_list',
+      'users',
+      'weight_list',
+    ] as const) {
+      assert.deepEqual(parsed[listName], [])
+    }
+  })
+
+  it('normalizes null response lists to empty arrays', () => {
+    const parsed = parseSyncFromServerData({
+      account: rawData.account,
+      balance_list: null,
+      weight_list: null,
+    })
+
+    assert.deepEqual(parsed.balance_list, [])
     assert.deepEqual(parsed.weight_list, [])
   })
 })

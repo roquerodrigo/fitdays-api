@@ -179,9 +179,14 @@ describe('FitDaysClient — sync', () => {
     c.session = { token: 't', uid: 1 }
 
     const res = await c.syncFromServer({ endTime: 0, startTime: 1 })
+    const firstExtensionData = res.data.weight_list[0].ext_data
+    const secondExtensionData = res.data.weight_list[1].ext_data
+
     assert.equal(res.data.weight_list.length, 2)
-    assert.equal(res.data.weight_list[0].ext_data.age, 1)
-    assert.equal(res.data.weight_list[1].ext_data.age, 2)
+    assert.ok(firstExtensionData)
+    assert.ok(secondExtensionData)
+    assert.equal(firstExtensionData.age, 1)
+    assert.equal(secondExtensionData.age, 2)
   })
 
   it('syncAll requests a ~6-year window with start_time = now', async () => {

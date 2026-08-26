@@ -103,7 +103,7 @@ export type SkipRecord = Record<string, unknown>
 
 /**
  * Body of `data` in the response of POST /api/sync/syncFromServer.
- * `weight_list[].ext_data` is parsed from JSON by the SDK before this is exposed.
+ * The SDK normalizes omitted lists to empty arrays before exposing this type.
  */
 export type SyncFromServerData = {
   account: AccountInfo
@@ -121,8 +121,22 @@ export type SyncFromServerData = {
   weight_list: WeightRecord[]
 }
 
-/** Untransformed response — `weight_list[].ext_data` is still a JSON string. */
-export type SyncFromServerDataRaw = Omit<SyncFromServerData, 'weight_list'> & { weight_list: WeightRecordRaw[] }
+/** Untransformed response — the server may omit lists and return null list values. */
+export type SyncFromServerDataRaw = {
+  account: AccountInfo
+  balance_list?: BalanceRecord[] | null
+  bind_device?: BindDevice[] | null
+  devices?: Device[] | null
+  gravity_list?: GravityRecord[] | null
+  height_list?: HeightRecord[] | null
+  hr_list?: HrRecord[] | null
+  impedance_list?: ImpedanceRecord[] | null
+  products?: null | Product[]
+  rulers_list?: null | RulerRecord[]
+  skip_list?: null | SkipRecord[]
+  users?: null | User[]
+  weight_list?: null | WeightRecordRaw[]
+}
 
 /** Profile of a measured user (sub-user) belonging to an account. */
 export type User = {
@@ -144,7 +158,7 @@ export type User = {
   updated_at: string
 }
 
-/** Parsed shape of `WeightRecord.ext_data` (it is stored as a JSON string). */
+/** Parsed shape of `WeightRecord.ext_data` when the measurement includes extension data. */
 export type WeightExtData = {
   age: number
   arm: number
@@ -212,8 +226,8 @@ export type WeightExtData = {
  * - `weight_g`: integer grams
  * - `weight_kg` / `weight_lb`: float
  * - `measured_time`: unix seconds; `created_at` / `updated_at`: "YYYY-MM-DD HH:MM:SS" strings
- * - `ext_data`: parsed {@link WeightExtData} (the server stores it as a JSON
- *   string; see {@link WeightRecordRaw} for the untransformed shape)
+ * - `ext_data`: parsed {@link WeightExtData}, or `null` when the server omits
+ *   extension data (see {@link WeightRecordRaw} for the wire shape)
  */
 export type WeightRecord = {
   adc: number
@@ -231,7 +245,7 @@ export type WeightRecord = {
   data_id: string
   device_id: string
   electrode: number
-  ext_data: WeightExtData
+  ext_data: null | WeightExtData
   gravity_data_id: string
   hr: number
   id: number
@@ -255,5 +269,5 @@ export type WeightRecord = {
   weight_lb: number
 }
 
-/** {@link WeightRecord} before parsing — `ext_data` is still a JSON string. */
-export type WeightRecordRaw = Omit<WeightRecord, 'ext_data'> & { ext_data: string }
+/** {@link WeightRecord} before parsing — `ext_data` may be absent, null, or an encoded JSON string. */
+export type WeightRecordRaw = Omit<WeightRecord, 'ext_data'> & { ext_data?: null | string }
