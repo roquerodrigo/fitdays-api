@@ -65,7 +65,6 @@ release-please/publish rely on.
 - **No CI step publishes to npm.** `release.yml` only runs `release-please`
   (version bump + tag + GitHub release); someone still has to run
   `npm publish` locally afterward (`prepack`/`prepublishOnly` build and
-  verify it). This has already drifted: as of this writing the npm registry
-  only has `1.0.0` published even though `1.0.1`/`1.0.2` are tagged and in
-  `CHANGELOG.md` — check `npm view fitdays-api version` against
-  `package.json` before assuming a release shipped.
+  verify it). This has drifted before — tagged/`CHANGELOG.md` versions ran
+  ahead of what was actually on npm; check `npm view fitdays-api version`
+  against `package.json` before assuming a release shipped.
