@@ -2,6 +2,8 @@
 
 [![npm](https://img.shields.io/npm/v/fitdays-api)](https://www.npmjs.com/package/fitdays-api)
 
+[![Sponsor](https://img.shields.io/badge/Sponsor-%E2%9D%A4-db61a2?logo=githubsponsors&logoColor=white&style=for-the-badge)](https://github.com/sponsors/roquerodrigo)
+
 Unofficial TypeScript SDK for the FitDays API.
 
 Covers email/phone login and data sync (`syncFromServer`), with full typings for the response — including automatic JSON parsing of the `ext_data` field on weight measurements.
@@ -275,3 +277,7 @@ FITDAYS_PASSWORD=my-password
 ## Disclaimer
 
 This SDK is not affiliated with or endorsed by FitDays / Icomon. Use at your own risk and respect the service's ToS.
+
+## Support
+
+This SDK is built and maintained on personal time, on hardware bought for the purpose. If it is useful to you, consider [sponsoring the work](https://github.com/sponsors/roquerodrigo) — it keeps the devices, the testing and the releases coming.
