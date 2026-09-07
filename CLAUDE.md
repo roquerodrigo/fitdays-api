@@ -54,7 +54,8 @@ release-please/publish rely on.
   suite — real-device/live-server testing only happens via
   `npm run test:sync`, which is not run in CI.
 - **`ci.yml` gates lint, build and tests** on push to `main` and on every
-  PR, by calling the shared `npm-*` reusables from `roquerodrigo/.github`.
+  PR, by calling the shared reusables (`node-lint`, `node-build`,
+  `node-test`) from `roquerodrigo/workflows`.
   The lint job runs `eslint` directly, *not* `npm run lint` — that script
   carries `--fix` and would pass on anything auto-fixable. Every job
   installs with `npm ci`, so a lockfile out of sync with `package.json`
@@ -65,7 +66,6 @@ release-please/publish rely on.
 - **No CI step publishes to npm.** `release.yml` only runs `release-please`
   (version bump + tag + GitHub release); someone still has to run
   `npm publish` locally afterward (`prepack`/`prepublishOnly` build and
-  verify it). This has already drifted: as of this writing the npm registry
-  only has `1.0.0` published even though `1.0.1`/`1.0.2` are tagged and in
-  `CHANGELOG.md` — check `npm view fitdays-api version` against
-  `package.json` before assuming a release shipped.
+  verify it). This has drifted before (tags/`CHANGELOG.md` ahead of what's
+  on npm) — check `npm view fitdays-api version` against `package.json`
+  before assuming a release shipped.
