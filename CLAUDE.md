@@ -63,9 +63,9 @@ release-please/publish rely on.
 - Versioning and `CHANGELOG.md` are fully owned by `release-please`
   (Conventional Commits parsed from `main`). Don't hand-edit
   `package.json`'s `version`.
-- **No CI step publishes to npm.** `release.yml` only runs `release-please`
-  (version bump + tag + GitHub release); someone still has to run
-  `npm publish` locally afterward (`prepack`/`prepublishOnly` build and
-  verify it). This has drifted before (tags/`CHANGELOG.md` ahead of what's
-  on npm) — check `npm view fitdays-api version` against `package.json`
-  before assuming a release shipped.
+- **Publishing to npm is automated.** `release.yml` runs `release-please`
+  (version bump + tag + GitHub release), then a `publish` job fires only when
+  `release-created == 'true'` and pushes to npm via trusted publishing (OIDC,
+  `id-token: write` — no stored registry token). The `workflow_run.event ==
+  'push'` guard is what stops a green-CI PR from cutting a release.
+  `prepack`/`prepublishOnly` build and verify the package before it ships.
