@@ -9,7 +9,7 @@ export {
 export { PASSWORD_SALT, SIGN_SECRET } from './constants/sign.js'
 export { FitDaysApiError } from './errors/api-error.js'
 export type { ApiResponse, LoginData } from './types/api.js'
-export type { ClientOptions, Region, Session } from './types/client.js'
+export type { ClientOptions, Region, RegionLocale, Session } from './types/client.js'
 export type { SignParams } from './types/sign.js'
 export type {
   AccountInfo,

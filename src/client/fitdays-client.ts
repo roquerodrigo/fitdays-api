@@ -8,6 +8,7 @@ import {
   DEFAULT_DEVICE_MODEL,
   FULL_SYNC_WINDOW_SECONDS,
   REGION_HOSTS,
+  REGION_LOCALES,
   USER_AGENT,
 } from '../constants/api.js'
 import { FitDaysApiError } from '../errors/api-error.js'
@@ -27,9 +28,10 @@ export class FitDaysClient {
 
   constructor(opts: ClientOptions = {}) {
     const region = opts.region ?? 'us'
+    const locale = REGION_LOCALES[region]
     this.baseUrl = (opts.baseUrl ?? REGION_HOSTS[region]).replace(/\/$/, '')
-    this.country = opts.country ?? (region === 'cn' ? 'CN' : 'US')
-    this.language = opts.language ?? (region === 'cn' ? 'zh' : 'en')
+    this.country = opts.country ?? locale.country
+    this.language = opts.language ?? locale.language
     this.deviceModel = opts.deviceModel ?? DEFAULT_DEVICE_MODEL
     this.clientId = opts.clientId ?? newClientId()
     this.fetchImpl = opts.fetchImpl ?? fetch
