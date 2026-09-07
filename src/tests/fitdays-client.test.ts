@@ -80,6 +80,19 @@ describe('FitDaysClient — constructor', () => {
     assert.equal(c.session, null)
   })
 
+  it('defaults country and language to the China locale for the cn region', () => {
+    const c = new FitDaysClient({ region: 'cn' })
+    assert.equal(c.country, 'CN')
+    assert.equal(c.language, 'zh')
+    assert.equal(c.baseUrl, 'https://online.fitdays.cn')
+  })
+
+  it('keeps the US locale for the eu region', () => {
+    const c = new FitDaysClient({ region: 'eu' })
+    assert.equal(c.country, 'US')
+    assert.equal(c.language, 'en')
+  })
+
   it('honours overrides', () => {
     const c = new FitDaysClient({
       clientId: 'AAAA',

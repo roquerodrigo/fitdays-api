@@ -1,4 +1,4 @@
-import type { Region } from '../types/client.js'
+import type { Region, RegionLocale } from '../types/client.js'
 
 export const APP_VER = '1.21.0'
 export const DEFAULT_DEVICE_MODEL = 'AndroidSDKbuiltforarm64-6.0'
@@ -8,6 +8,12 @@ export const REGION_HOSTS: Record<Region, string> = {
   cn: 'https://online.fitdays.cn',
   eu: 'https://online-eu.fitdays.cn',
   us: 'https://online-us.fitdays.cn',
+}
+
+export const REGION_LOCALES: Record<Region, RegionLocale> = {
+  cn: { country: 'CN', language: 'zh' },
+  eu: { country: 'US', language: 'en' },
+  us: { country: 'US', language: 'en' },
 }
 
 /** Default sync window (~6 years / 2160 days) used by `syncAll()`. */

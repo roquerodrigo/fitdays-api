@@ -10,6 +10,11 @@ export type ClientOptions = {
 
 export type Region = 'cn' | 'eu' | 'us'
 
+export type RegionLocale = {
+  country: string
+  language: string
+}
+
 export type Session = {
   refreshToken?: string
   token: string
