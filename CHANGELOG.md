@@ -1,5 +1,39 @@
 # Changelog
 
+## [1.0.4](https://github.com/roquerodrigo/fitdays-api/compare/v1.0.3...v1.0.4) (2026-09-07)
+
+
+### Bug Fixes
+
+* **client:** use China region locale defaults ([cac51fa](https://github.com/roquerodrigo/fitdays-api/commit/cac51fae7fa3745fe97532fd58952d7316254b94))
+* **sync:** handle optional response fields safely ([81fe733](https://github.com/roquerodrigo/fitdays-api/commit/81fe733b2fd255cadc2529929cefb0170c85df75))
+
+
+### Code Refactoring
+
+* **client:** table the per-region locale defaults ([786f4af](https://github.com/roquerodrigo/fitdays-api/commit/786f4af92f8bcb0dd470129d733387c457d330a1))
+
+
+### Development Dependencies
+
+* **deps-dev:** bump the npm group across 1 directory with 6 updates ([88b4a3f](https://github.com/roquerodrigo/fitdays-api/commit/88b4a3f7fbcb5ff916430a8c16f71bb63d9818be))
+
+
+### Documentation
+
+* add GitHub Sponsors button and support section ([952502e](https://github.com/roquerodrigo/fitdays-api/commit/952502e07b8278c3a5695d7f189f2503ac2b8ae1))
+* refresh CLAUDE.md ([3dcbad6](https://github.com/roquerodrigo/fitdays-api/commit/3dcbad6889b33751d8894e2962ef96c5843e1b57))
+
+
+### Build System
+
+* **deps:** hold TypeScript at 6.0.3 for typescript-eslint compatibility ([fc9e487](https://github.com/roquerodrigo/fitdays-api/commit/fc9e487b9bed9d24decb215fbb75c2691270cff0))
+
+
+### Miscellaneous Chores
+
+* release on every conventional commit type ([ac6b4b9](https://github.com/roquerodrigo/fitdays-api/commit/ac6b4b948b7b310cdff6e95d1b7380d6d61447cb))
+
 ## [1.0.3](https://github.com/roquerodrigo/fitdays-api/compare/v1.0.2...v1.0.3) (2026-08-03)
 
 
