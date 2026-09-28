@@ -1,7 +1,7 @@
 # fitdays-api
 
 Unofficial TypeScript SDK for the FitDays / Icomon smart-scale cloud API
-(email/phone login + `syncFromServer` data sync). Published to npm as
+(email login + `syncFromServer` data sync). Published to npm as
 `fitdays-api`. Public repo, MIT-licensed.
 
 For code style, naming, typing, commit and release conventions, **read
@@ -10,7 +10,8 @@ project is, how it's laid out, and how to build/test/lint it.
 
 ## What it does
 
-`FitDaysClient` logs in (email or phone) and pulls body-composition sync
+`FitDaysClient` logs in by email (there is no phone login, although
+`README.md` still lists a `loginWithPhone`) and pulls body-composition sync
 data from FitDays' servers (`us` / `eu` / `cn` regions). Responses are fully
 typed, including the `ext_data` field on weight measurements, which the
 server returns as a JSON string and the SDK auto-parses into
