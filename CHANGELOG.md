@@ -1,5 +1,18 @@
 # Changelog
 
+## [1.0.5](https://github.com/roquerodrigo/fitdays-api/compare/v1.0.4...v1.0.5) (2026-10-06)
+
+
+### Development Dependencies
+
+* **deps-dev:** bump brace-expansion from 5.0.5 to 5.0.12 ([2716495](https://github.com/roquerodrigo/fitdays-api/commit/27164951357bd603e5796b98a2e876f567ec0c45))
+
+
+### Documentation
+
+* refresh CLAUDE.md ([126a2c7](https://github.com/roquerodrigo/fitdays-api/commit/126a2c7907cb27d83dfa65b701262e5bc9903644))
+* refresh CLAUDE.md ([e448d72](https://github.com/roquerodrigo/fitdays-api/commit/e448d72db0a2f7cea88a4e4a1fd63681b730d7d0))
+
 ## [1.0.4](https://github.com/roquerodrigo/fitdays-api/compare/v1.0.3...v1.0.4) (2026-09-07)
 
 
