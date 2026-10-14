@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.5](https://github.com/roquerodrigo/fitdays-api/compare/v1.0.4...v1.0.5) (2026-10-14)
+
+
+### Miscellaneous Chores
+
+* **release:** keep only user-facing changes in the changelog ([fc5702f](https://github.com/roquerodrigo/fitdays-api/commit/fc5702f1d3ba50e26342ad6468307a28a7cf9b6f))
+
 ## [1.0.4](https://github.com/roquerodrigo/fitdays-api/compare/v1.0.3...v1.0.4) (2026-09-07)
 
 
