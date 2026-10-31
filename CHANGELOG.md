@@ -1,5 +1,9 @@
 # Changelog
 
+## [1.0.5](https://github.com/roquerodrigo/fitdays-api/compare/v1.0.4...v1.0.5) (2026-10-31)
+
+Internal maintenance only, with no changes for those who use the project.
+
 ## [1.0.4](https://github.com/roquerodrigo/fitdays-api/compare/v1.0.3...v1.0.4) (2026-09-07)
 
 
