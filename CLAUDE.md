@@ -36,7 +36,7 @@ errors) can change shape freely. `src/scripts/` (`test-sync.ts`,
 | `npm run test:sync` | real login + full sync against the live FitDays server; needs `FITDAYS_EMAIL` / `FITDAYS_PASSWORD` in a local `.env` (gitignored); writes `sync-response.json` |
 
 Run `npm run lint && npm test` before committing — both mirror the checks
-release-please/publish rely on.
+the release and publish jobs rely on.
 
 ## Non-obvious things
 
@@ -61,12 +61,12 @@ release-please/publish rely on.
   carries `--fix` and would pass on anything auto-fixable. Every job
   installs with `npm ci`, so a lockfile out of sync with `package.json`
   fails the build.
-- Versioning and `CHANGELOG.md` are fully owned by `release-please`
+- Versioning and `CHANGELOG.md` are fully owned by Release Autopilot
   (Conventional Commits parsed from `main`). Don't hand-edit
   `package.json`'s `version`.
-- **Publishing to npm is automated.** `release.yml` runs `release-please`
+- **Publishing to npm is automated.** `release.yml` runs Release Autopilot
   (version bump + tag + GitHub release), then a `publish` job fires only when
-  `release-created == 'true'` and pushes to npm via trusted publishing (OIDC,
+  `released == 'true'` and pushes to npm via trusted publishing (OIDC,
   `id-token: write` — no stored registry token). The `workflow_run.event ==
   'push'` guard is what stops a green-CI PR from cutting a release.
   `prepack`/`prepublishOnly` build and verify the package before it ships.
