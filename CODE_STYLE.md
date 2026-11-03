@@ -142,7 +142,7 @@ Skip it only on emergency `git commit --no-verify` and immediately re-run
 ## Conventional commits
 
 All commits follow [Conventional Commits](https://www.conventionalcommits.org/),
-which `release-please` parses to bump `package.json` `version` and generate
+which Release Autopilot parses to bump `package.json` `version` and generate
 `CHANGELOG.md`:
 
 | Type | Meaning | Bump |
@@ -173,11 +173,11 @@ which `release-please` parses to bump `package.json` `version` and generate
 
 ## Releasing
 
-- `release-please` runs on `main` and opens a release-PR with the next
+- Release Autopilot runs on `main` and opens a release-PR with the next
   version + `CHANGELOG.md`. Merging that PR triggers the publish job
   (`npm publish` via OIDC + npm Trusted Publisher — no token in repo
   secrets).
-- Don't manually edit `package.json` `version` — release-please owns it.
+- Don't manually edit `package.json` `version` — Release Autopilot owns it.
 
 ## Testing
 
