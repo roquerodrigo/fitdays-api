@@ -235,9 +235,23 @@ describe('FitDaysClient — request', () => {
     await c.request('api/whatever')
 
     const u = new URL(signedUrl)
-    for (const k of ['app_ver', 'client_id', 'country', 'device_model', 'language',
-      'os_type', 'request_id', 'source', 'timestamp', 'token', 'uid', 'sign', 'capp_ver']) {
-      assert.ok(u.searchParams.has(k), `missing ${k}`)
+    const expectedParameters = [
+      'app_ver',
+      'client_id',
+      'country',
+      'device_model',
+      'language',
+      'os_type',
+      'request_id',
+      'source',
+      'timestamp',
+      'token',
+      'uid',
+      'sign',
+      'capp_ver',
+    ]
+    for (const parameter of expectedParameters) {
+      assert.ok(u.searchParams.has(parameter), `missing ${parameter}`)
     }
     assert.equal(u.searchParams.get('app_ver'), '1.21.0')
     assert.equal(u.searchParams.get('capp_ver'), '1.21.0')
