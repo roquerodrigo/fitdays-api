@@ -17,6 +17,10 @@ updates:
       prefix: "deps"
       prefix-development: "deps-dev"
       include: "scope"
+    ignore:
+      # typescript-eslint does not support TypeScript 7 yet
+      - dependency-name: "typescript"
+        versions: [">= 7"]
 
   - package-ecosystem: "github-actions"
     directory: "/"
